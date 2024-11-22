@@ -53,5 +53,5 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(Siamese_LSTM_model.parameters(), lr=0.001)
 
 # Train and Evaluate
-train_model(Siamese_LSTM_model, train_loader, criterion, optimizer, DEVICE, epochs=1)
+train_model(Siamese_LSTM_model, train_loader, criterion, optimizer, DEVICE)
 evaluate_model(Siamese_LSTM_model, test_loader, DEVICE)

@@ -47,5 +47,5 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(lstm_attention_model.parameters(), lr=0.001)
 
 # Train and Evaluate
-train_model(lstm_attention_model, train_loader, criterion, optimizer, DEVICE, epochs=1)
+train_model(lstm_attention_model, train_loader, criterion, optimizer, DEVICE)
 evaluate_model(lstm_attention_model, test_loader, DEVICE)

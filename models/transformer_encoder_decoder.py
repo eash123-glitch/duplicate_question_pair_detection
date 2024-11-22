@@ -56,5 +56,5 @@ model = TransformerEncoderDecoder(embedding_dim=EMBEDDING_DIM)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-train_model(model, train_loader, criterion, optimizer, DEVICE, epochs=1)
+train_model(model, train_loader, criterion, optimizer, DEVICE)
 evaluate_model(model, test_loader, DEVICE)

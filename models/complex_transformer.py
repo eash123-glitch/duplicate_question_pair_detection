@@ -108,5 +108,5 @@ model = ComplexEncoderDecoder(embedding_dim=300, hidden_dim=256, num_classes=2, 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-train_model(model, train_loader, criterion, optimizer, DEVICE, epochs=1)
+train_model(model, train_loader, criterion, optimizer, DEVICE)
 evaluate_model(model, test_loader, DEVICE)

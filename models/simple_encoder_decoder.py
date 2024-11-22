@@ -52,5 +52,5 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(simple_encoder_decoder_model.parameters(), lr=0.001)
 
 # Train and Evaluate
-train_model(simple_encoder_decoder_model, train_loader, criterion, optimizer, DEVICE, epochs=1)
+train_model(simple_encoder_decoder_model, train_loader, criterion, optimizer, DEVICE)
 evaluate_model(simple_encoder_decoder_model, test_loader, DEVICE)
