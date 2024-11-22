@@ -89,6 +89,45 @@ The **SiameseLSTM-CNN** combines the strengths of LSTMs and CNNs. It uses LSTMs 
 | **SiameseLSTM**        | 80-83        | Sequential modeling with LSTMs                |
 | **SiameseLSTM-CNN**    | 85-87        | Combines strengths of LSTM and CNN            |
 
-Let me know if you'd like more detailed explanations or an analysis of specific model components!
+#### 5. **Siamese LSTM with Attention**  
+The **SiameseLSTMWithAttention** introduces an attention mechanism to improve the semantic understanding of input sequences. Instead of relying solely on the last hidden state of the LSTM, it computes attention weights over all hidden states to focus on the most relevant parts of the sequence.  
 
+  - Bidirectional LSTM captures forward and backward context.
+  - Attention mechanism computes importance weights for each timestep.
+  - Outputs an attention-weighted sum of LSTM hidden states, emphasizing key parts of the input.
+  - Better at focusing on the most critical tokens in longer sequences.
+  - Captures fine-grained semantic relationships between questions.
 
+---
+
+#### 6. **Simple Encoder-Decoder Model**  
+This model uses an encoder-decoder architecture with LSTM layers. The encoder processes the input sequence and passes its output to the decoder, which generates a sequence representation. The last hidden state of the decoder is used for classification.
+
+  - LSTM-based encoder-decoder design for sequence processing.
+  - Sequential modeling of questions, with outputs used for similarity classification.
+  - Simpler than attention-based models while effective for moderate-length sequences.
+  - Provides a foundation for integrating attention in later models.
+  - Relies only on the final hidden state of the decoder, potentially losing context for long sequences.
+
+---
+
+#### 7. **Bidirectional LSTM Encoder-Decoder (BiLSTMEncoderDecoder)**  
+This model builds on the encoder-decoder architecture by introducing bidirectional LSTM layers in both the encoder and decoder. Bidirectional LSTMs allow the model to understand both past and future contexts, making the representations richer.
+
+  - Bidirectional LSTM in both encoder and decoder.
+  - Uses all context from both directions during encoding and decoding.
+  - Outputs a concatenation of bidirectional decoder states for classification.
+  - Stronger contextual modeling than unidirectional encoder-decoder models.
+  - Captures dependencies from both ends of the sequence.
+
+---
+
+### Key Takeaways
+
+| Model                          | Unique Feature                                | Accuracy (%)  | Strengths                                   |
+|--------------------------------|-----------------------------------------------|---------------|---------------------------------------------|
+| **SiameseLSTMWithAttention**   | Attention over LSTM hidden states             | 87-89         | Emphasizes critical tokens, handles long sequences |
+| **SimpleEncoderDecoder**       | LSTM-based sequence processing                | 80-82         | Simple, effective for moderate-length sequences |
+| **BiLSTMEncoderDecoder**       | Bidirectional LSTMs in encoder and decoder    | 85-87         | Rich contextual understanding, bidirectional context |
+
+These models showcase progressively enhanced capabilities in capturing sequence semantics, making them suitable for tasks like duplicate question detection. Let me know if you'd like further clarification or next steps!
