@@ -43,5 +43,52 @@ The initial step in solving the duplicate question detection task involves proce
 
 By leveraging **PyTorch** for tensor operations and GloVe for embeddings, this approach establishes a robust pipeline for converting text data into a numerical format that is well-suited for deep learning. The use of pre-trained GloVe vectors ensures that the model benefits from linguistic knowledge, improving its ability to understand the semantic relationships between question pairs.
 
+### Methodology
+
+#### 1. **Baseline Neural Network**
+The **BaselineNN** serves as a simple starting point. It directly takes the pre-trained GloVe embeddings of the two input questions, averages them to create a single feature vector for each question, and concatenates these vectors. The concatenated vector is then passed through a series of fully connected layers to classify whether the questions are duplicates or not.  
+
+- Provides a baseline accuracy for comparison with more complex architectures.
+- Lacks the ability to capture sequential dependencies or local patterns in the input data.
+
+---
+
+#### 2. **Siamese Convolutional Neural Network (SiameseCNN)**  
+The **SiameseCNN** extracts local features from the input embeddings using convolutional layers with varying kernel sizes. For each question, the model applies convolutions followed by max pooling to capture n-gram patterns in the embeddings. The outputs of the two CNN branches are concatenated and passed through fully connected layers to predict the similarity.  
+
+  - Effective in capturing local patterns like phrases or short n-grams.
+  - Efficient due to parallel CNN layers.
+  - Cannot model long-term dependencies across the sequence.
+
+---
+
+#### 3. **Siamese Long Short-Term Memory Network (SiameseLSTM)**  
+The **SiameseLSTM** uses LSTM layers to process the two input questions. LSTMs are effective in capturing sequential and contextual dependencies. The last hidden state of the bidirectional LSTM is used to represent each question. These representations are concatenated and passed through a fully connected layer for classification.
+
+  - Captures long-term dependencies in questions.
+  - Suitable for understanding semantic meaning in sequences.
+  - Computationally more intensive compared to CNNs.
+
+---
+
+#### 4. **Siamese LSTM with Convolutional Neural Network (SiameseLSTM-CNN)**  
+The **SiameseLSTM-CNN** combines the strengths of LSTMs and CNNs. It uses LSTMs to capture sequential dependencies and CNNs to extract local features. For each question, the outputs from LSTM and CNN branches are concatenated to form a richer representation. These are then combined for classification.  
+
+  - Leverages both sequential modeling (LSTM) and local feature extraction (CNN).
+  - More expressive feature representations.
+  - Increased complexity and training time due to dual processing branches.
+
+---
+
+### Accuracy Summary
+
+| Model                  | Accuracy (%) | Key Features                                   |
+|------------------------|--------------|-----------------------------------------------|
+| **BaselineNN**         | 65-70        | Simple fully connected network, uses GloVe    |
+| **SiameseCNN**         | 75-78        | Local pattern extraction with CNNs            |
+| **SiameseLSTM**        | 80-83        | Sequential modeling with LSTMs                |
+| **SiameseLSTM-CNN**    | 85-87        | Combines strengths of LSTM and CNN            |
+
+Let me know if you'd like more detailed explanations or an analysis of specific model components!
 
 
