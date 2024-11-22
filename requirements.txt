@@ -1,0 +1,6 @@
+numpy
+torch==2.5.1+cu121
+torchvision==0.16.1+cu121
+tqdm
+nltk
+kaggle
