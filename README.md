@@ -80,15 +80,6 @@ The **SiameseLSTM-CNN** combines the strengths of LSTMs and CNNs. It uses LSTMs 
 
 ---
 
-### Accuracy Summary
-
-| Model                  | Accuracy (%) | Key Features                                   |
-|------------------------|--------------|-----------------------------------------------|
-| **BaselineNN**         | 65-70        | Simple fully connected network, uses GloVe    |
-| **SiameseCNN**         | 75-78        | Local pattern extraction with CNNs            |
-| **SiameseLSTM**        | 80-83        | Sequential modeling with LSTMs                |
-| **SiameseLSTM-CNN**    | 85-87        | Combines strengths of LSTM and CNN            |
-
 #### 5. **Siamese LSTM with Attention**  
 The **SiameseLSTMWithAttention** introduces an attention mechanism to improve the semantic understanding of input sequences. Instead of relying solely on the last hidden state of the LSTM, it computes attention weights over all hidden states to focus on the most relevant parts of the sequence.  
 
@@ -121,14 +112,6 @@ This model builds on the encoder-decoder architecture by introducing bidirection
   - Captures dependencies from both ends of the sequence.
 
 ---
-
-### Key Takeaways
-
-| Model                          | Unique Feature                                | Accuracy (%)  | Strengths                                   |
-|--------------------------------|-----------------------------------------------|---------------|---------------------------------------------|
-| **SiameseLSTMWithAttention**   | Attention over LSTM hidden states             | 87-89         | Emphasizes critical tokens, handles long sequences |
-| **SimpleEncoderDecoder**       | LSTM-based sequence processing                | 80-82         | Simple, effective for moderate-length sequences |
-| **BiLSTMEncoderDecoder**       | Bidirectional LSTMs in encoder and decoder    | 85-87         | Rich contextual understanding, bidirectional context |
 
 8. **Attention-based Encoder-Decoder (AttentionEncoderDecoder)**
 
@@ -174,18 +157,17 @@ The **UltimateEncoderDecoder** model combines the best features of all the previ
 
 | **Model**                       | **Unique Feature**                                 | **Accuracy (%)** | **Strengths**                                      |
 |----------------------------------|----------------------------------------------------|------------------|----------------------------------------------------|
-| **BaselineNN**                   | Simple feedforward neural network for classification | 75-78            | Easy to implement, good baseline for comparison    |
-| **SiameseCNN**                  | Convolutional layers for feature extraction       | 82-85            | Good for extracting local features, fast to train |
-| **SiameseLSTM**                 | Twin LSTM for sequence comparison                 | 84-86            | Effective for sequence comparison tasks            |
-| **SiameseLSTM-CNN**             | Hybrid model combining LSTM and CNN for feature extraction | 86-88        | Captures both sequential and local features       |
-| **MemoryNetworkBasedModel**     | Memory network for reasoning and context-awareness | 87-89            | Retains long-term context, good for complex reasoning tasks |
-| **SiameseLSTMWithAttention**     | Attention over LSTM hidden states                 | 87-89            | Emphasizes critical tokens, handles long sequences |
-| **SimpleEncoderDecoder**        | LSTM-based sequence processing                    | 80-82            | Simple, effective for moderate-length sequences    |
+| **BaselineNN**                   | Simple feedforward neural network for classification | 72.21            | Easy to implement, good baseline for comparison    |
+| **SiameseCNN**                  | Convolutional layers for feature extraction       | 81.53            | Good for extracting local features, fast to train |
+| **SiameseLSTM**                 | Twin LSTM for sequence comparison                 | 74.65            | Effective for sequence comparison tasks            |
+| **SiameseLSTM-CNN**             | Hybrid model combining LSTM and CNN for feature extraction | 78.88        | Captures both sequential and local features       |
+| **SiameseLSTMWithAttention**     | Attention over LSTM hidden states                 | 80.70            | Emphasizes critical tokens, handles long sequences |
+| **SimpleEncoderDecoder**        | LSTM-based sequence processing                    | 75.45            | Simple, effective for moderate-length sequences    |
 | **BiLSTMEncoderDecoder**        | Bidirectional LSTMs in encoder and decoder        | 85-87            | Rich contextual understanding, bidirectional context |
-| **AttentionEncoderDecoder**     | Attention mechanism for context-based generation  | 88-90            | Focuses on relevant parts of input, better for long sequences |
-| **ComplexEncoderDecoder**       | Multi-head attention, residual connections        | 89-91            | Deeper representation, handles complex dependencies |
-| **TransformerEncoderDecoder**   | Pure attention-based architecture, no LSTMs       | 91-93            | Scalable, efficient for long sequences and large datasets |
-| **UltimateEncoderDecoder**      | Gated Residual Networks, Memory Networks, Multi-head Attention | 92-94        | Combines best features for rich, context-aware representations |
+| **AttentionEncoderDecoder**     | Attention mechanism for context-based generation  | 79.09            | Focuses on relevant parts of input, better for long sequences |
+| **ComplexEncoderDecoder**       | Multi-head attention, residual connections        | 80.23            | Deeper representation, handles complex dependencies |
+| **TransformerEncoderDecoder**   | Pure attention-based architecture, no LSTMs       | 81.62            | Scalable, efficient for long sequences and large datasets |
+| **UltimateEncoderDecoder**      | Gated Residual Networks, Memory Networks, Multi-head Attention | 73.28        | Combines best features for rich, context-aware representations |
 
 
 
