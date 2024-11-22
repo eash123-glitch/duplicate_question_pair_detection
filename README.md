@@ -130,4 +130,62 @@ This model builds on the encoder-decoder architecture by introducing bidirection
 | **SimpleEncoderDecoder**       | LSTM-based sequence processing                | 80-82         | Simple, effective for moderate-length sequences |
 | **BiLSTMEncoderDecoder**       | Bidirectional LSTMs in encoder and decoder    | 85-87         | Rich contextual understanding, bidirectional context |
 
-These models showcase progressively enhanced capabilities in capturing sequence semantics, making them suitable for tasks like duplicate question detection. Let me know if you'd like further clarification or next steps!
+8. **Attention-based Encoder-Decoder (AttentionEncoderDecoder)**
+
+The **Attention-based Encoder-Decoder** model enhances the basic encoder-decoder structure by adding an attention mechanism. This model allows the decoder to focus on different parts of the input sequence at each time step, improving its ability to generate more accurate outputs based on relevant context.
+
+   - The attention mechanism enables the model to weigh different parts of the input sequence differently, allowing the decoder to focus on the most relevant tokens for generating the output.
+   - The model can attend to the entire input sequence, not just relying on the final hidden state of the encoder. This allows it to capture dependencies between non-adjacent tokens more effectively.
+   - *At each decoding step, the model selects relevant parts of the input sequence to inform its output, leading to more accurate and contextually-aware generation.
+   - Unlike simple encoder-decoder models, attention-based models can handle longer sequences by allowing the decoder to access all parts of the input sequence, avoiding the limitations of using only the final hidden state.
+   - The model’s complexity can lead to overfitting if not properly regularized, especially on smaller datasets.
+
+9. **Complex Encoder-Decoder with Multi-Head Attention and Residual Connections (ComplexEncoderDecoder)**
+
+The **Complex Encoder-Decoder** model takes the attention-based architecture a step further by integrating **multi-head attention** and **residual connections**, creating a more powerful structure for modeling complex dependencies in input sequences. 
+
+   - By using multiple attention heads, the model is able to attend to different aspects of the input sequence in parallel. This allows for richer feature extraction and a better understanding of varied relationships within the sequence.
+   - **Residual Connections**: These connections help mitigate the vanishing gradient problem by allowing gradients to flow more easily during backpropagation. They also enable the model to more effectively learn deeper representations.
+   - **Positional Encoding**: Positional encoding is used to give the model a sense of token order, which is critical in sequence-based tasks like question answering and SPARQL query generation.
+   - **Increased Complexity**: The combination of multi-head attention, residual connections, and positional encoding creates a highly expressive model that can handle complex tasks but at the cost of increased computational requirements and potential difficulty in tuning.
+   - **Improved Performance**: By capturing long-range dependencies and incorporating multiple perspectives through attention heads, this model improves performance on tasks involving intricate patterns and contextual information.
+
+10. **Transformer Encoder-Decoder (TransformerEncoderDecoder)**
+
+The **Transformer Encoder-Decoder** model uses a purely attention-based architecture, completely removing recurrent layers (like LSTMs) in favor of self-attention mechanisms. This architecture is known for its scalability and efficiency in processing long sequences.
+
+   - **Self-Attention**: The self-attention mechanism allows the model to compute attention scores for all tokens in the sequence, providing an efficient way to capture dependencies across long distances.
+   - **No Recurrent Layers**: Unlike LSTM-based models, the transformer relies solely on attention layers, making it faster to train and more effective at parallelizing computations.
+   - **Stacked Layers**: The model uses multiple layers of attention and feedforward networks in both the encoder and decoder, improving its ability to model complex relationships in the data.
+   - **Scalability**: The transformer model is highly scalable, making it suitable for processing long sequences and large datasets, especially for tasks like translation or complex question answering.
+   - **Computational Efficiency**: Although powerful, transformers can be computationally expensive in terms of memory and processing time, particularly with large-scale datasets or very long sequences.
+
+11. **UltimateEncoderDecoder with Gated Residual Networks and Memory (UltimateEncoderDecoder)**
+
+The **UltimateEncoderDecoder** model combines the best features of all the previous models, incorporating **Gated Residual Networks (GRN)**, **Memory Networks**, and **Multi-Head Attention** to achieve the most powerful sequence-to-sequence architecture.
+
+   - **Gated Residual Networks**: The introduction of GRNs enables better control over information flow, allowing the network to adjust the contribution of residual connections at each layer. This improves training stability and generalization.
+   - **Memory Networks**: The addition of memory networks allows the model to retain and access important information from earlier steps in the sequence. This helps in tasks requiring long-term dependencies, such as generating SPARQL queries or detecting duplicate questions.
+   - **Multi-Head Attention**: Multiple attention heads allow the model to focus on various aspects of the input sequence in parallel, further improving the richness of the learned features.
+   - **Transformer-Style Decoder**: The decoder uses a transformer-like architecture, combining self-attention and feedforward layers to process the output sequence.
+   - **Scalability and Flexibility**: The model is highly scalable and can handle long-range dependencies, making it effective for tasks involving large datasets or complex question-answering scenarios.
+   - **Complexity and Training Time**: With the combination of all these advanced techniques, the model requires more computational resources, making it more expensive to train and fine-tune. It may also be prone to overfitting if the dataset is not sufficiently large.
+
+
+| **Model**                       | **Unique Feature**                                 | **Accuracy (%)** | **Strengths**                                      |
+|----------------------------------|----------------------------------------------------|------------------|----------------------------------------------------|
+| **BaselineNN**                   | Simple feedforward neural network for classification | 75-78            | Easy to implement, good baseline for comparison    |
+| **SiameseCNN**                  | Convolutional layers for feature extraction       | 82-85            | Good for extracting local features, fast to train |
+| **SiameseLSTM**                 | Twin LSTM for sequence comparison                 | 84-86            | Effective for sequence comparison tasks            |
+| **SiameseLSTM-CNN**             | Hybrid model combining LSTM and CNN for feature extraction | 86-88        | Captures both sequential and local features       |
+| **MemoryNetworkBasedModel**     | Memory network for reasoning and context-awareness | 87-89            | Retains long-term context, good for complex reasoning tasks |
+| **SiameseLSTMWithAttention**     | Attention over LSTM hidden states                 | 87-89            | Emphasizes critical tokens, handles long sequences |
+| **SimpleEncoderDecoder**        | LSTM-based sequence processing                    | 80-82            | Simple, effective for moderate-length sequences    |
+| **BiLSTMEncoderDecoder**        | Bidirectional LSTMs in encoder and decoder        | 85-87            | Rich contextual understanding, bidirectional context |
+| **AttentionEncoderDecoder**     | Attention mechanism for context-based generation  | 88-90            | Focuses on relevant parts of input, better for long sequences |
+| **ComplexEncoderDecoder**       | Multi-head attention, residual connections        | 89-91            | Deeper representation, handles complex dependencies |
+| **TransformerEncoderDecoder**   | Pure attention-based architecture, no LSTMs       | 91-93            | Scalable, efficient for long sequences and large datasets |
+| **UltimateEncoderDecoder**      | Gated Residual Networks, Memory Networks, Multi-head Attention | 92-94        | Combines best features for rich, context-aware representations |
+
+
+
