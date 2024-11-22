@@ -1,4 +1,5 @@
 import re
+import nltk
 
 def clean_str(string, lower=True):
 
@@ -20,3 +21,11 @@ def clean_str(string, lower=True):
     if lower:
         result = result.lower()
     return result
+
+nltk.download('punkt')
+nltk.download('punkt_tab')
+
+
+# Tokenize sentences
+def tokenize(sentence):
+    return nltk.word_tokenize(sentence)
