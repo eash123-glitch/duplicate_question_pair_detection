@@ -57,4 +57,4 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 train_model(model, train_loader, criterion, optimizer, DEVICE)
-evaluate_model(model, test_loader, DEVICE)
+evaluate_model(model, test_loader, DEVICE )
