@@ -50,7 +50,10 @@ The **BaselineNN** serves as a simple starting point. It directly takes the pre-
 
 - Provides a baseline accuracy for comparison with more complex architectures.
 - Lacks the ability to capture sequential dependencies or local patterns in the input data.
-
+```bash
+cd models
+python3 baseline_nn.py
+```
 ---
 
 #### 2. **Siamese Convolutional Neural Network (SiameseCNN)**  
