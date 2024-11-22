@@ -20,7 +20,7 @@ The dataset used in this project is sourced from **Quora**, a popular question-a
 
 This dataset serves as an ideal benchmark for training and evaluating models on duplicate question detection, as it reflects real-world linguistic variations and challenges faced in tasks like query deduplication and semantic similarity detection.
 
-### **First Approach: Creating Tensors and Using GloVe Embeddings**
+### **Creating Tensors and Using GloVe Embeddings**
 
 The initial step in solving the duplicate question detection task involves processing the textual data into a machine-readable format. Here's the outline of this approach:
 
@@ -35,7 +35,12 @@ The initial step in solving the duplicate question detection task involves proce
 
 3. **Embedding with GloVe**  
    - **GloVe (Global Vectors for Word Representation)** embeddings are used to represent each word as a dense vector in a high-dimensional space.  
-   - Pre-trained GloVe vectors (e.g., `300d`) are loaded, and the vocabulary indices are mapped to their corresponding GloVe embeddings. This results in fixed-size embeddings for each question.  
+   - Pre-trained GloVe vectors (e.g., `300d`) are loaded, and the vocabulary indices are mapped to their corresponding GloVe embeddings. This results in fixed-size embeddings for each question.
+   - Glove embeddings can be downloaded by executing following command:
+     ```bash
+     pip install gdown
+     gdown --id 16uAbJ0bgq3mXo64bpYWhMqmLJnNg33nUGLvEmzsSeGM -O output.txt
+     ```
 
 4. **Tensor Preparation**  
    - Question pairs are represented as two tensors (one for each question) of equal size.  
@@ -43,7 +48,7 @@ The initial step in solving the duplicate question detection task involves proce
 
 By leveraging **PyTorch** for tensor operations and GloVe for embeddings, this approach establishes a robust pipeline for converting text data into a numerical format that is well-suited for deep learning. The use of pre-trained GloVe vectors ensures that the model benefits from linguistic knowledge, improving its ability to understand the semantic relationships between question pairs.
 
-### Methodology
+### Implementation
 
 To run the models, first go to models folder :
 ```bash
@@ -138,6 +143,7 @@ The **Attention-based Encoder-Decoder** model enhances the basic encoder-decoder
    - *At each decoding step, the model selects relevant parts of the input sequence to inform its output, leading to more accurate and contextually-aware generation.
    - Unlike simple encoder-decoder models, attention-based models can handle longer sequences by allowing the decoder to access all parts of the input sequence, avoiding the limitations of using only the final hidden state.
    - The model’s complexity can lead to overfitting if not properly regularized, especially on smaller datasets.
+---
 
 9. **Complex Encoder-Decoder with Multi-Head Attention and Residual Connections (ComplexEncoderDecoder)**
 
@@ -151,6 +157,7 @@ The **Complex Encoder-Decoder** model takes the attention-based architecture a s
 ```bash
 python3 complex_transformer.py
 ```
+---
 
 10. **Transformer Encoder-Decoder (TransformerEncoderDecoder)**
 
@@ -164,6 +171,7 @@ The **Transformer Encoder-Decoder** model uses a purely attention-based architec
 ```bash
 python3 transformer_encoder_decoder.py
 ```
+---
 11. **UltimateEncoderDecoder with Gated Residual Networks and Memory (UltimateEncoderDecoder)**
 
 The **UltimateEncoderDecoder** model combines the best features of all the previous models, incorporating **Gated Residual Networks (GRN)**, **Memory Networks**, and **Multi-Head Attention** to achieve the most powerful sequence-to-sequence architecture.
@@ -177,7 +185,7 @@ The **UltimateEncoderDecoder** model combines the best features of all the previ
 ```bash
 python3 complex_transformer.py
 ```
-
+---
 
 | **Model**                       | **Unique Feature**                                 | **Accuracy (%)** | **Strengths**                                      |
 |----------------------------------|----------------------------------------------------|------------------|----------------------------------------------------|
