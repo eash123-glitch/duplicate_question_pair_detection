@@ -1,4 +1,4 @@
-# **Duplicate question pair detection**
+# **Too many Questions**
 
 This project explores multiple deep learning models for sequence-to-sequence tasks, question pair similarity detection, and other NLP problems. The implemented architectures incorporate advanced mechanisms like attention, memory networks, and Siamese frameworks to enhance performance.
 
@@ -20,7 +20,7 @@ The dataset used in this project is sourced from **Quora**, a popular question-a
 
 This dataset serves as an ideal benchmark for training and evaluating models on duplicate question detection, as it reflects real-world linguistic variations and challenges faced in tasks like query deduplication and semantic similarity detection.
 
-### **First Approach: Creating Tensors and Using GloVe Embeddings**
+### **Creating Tensors and Using GloVe Embeddings**
 
 The initial step in solving the duplicate question detection task involves processing the textual data into a machine-readable format. Here's the outline of this approach:
 
@@ -35,7 +35,12 @@ The initial step in solving the duplicate question detection task involves proce
 
 3. **Embedding with GloVe**  
    - **GloVe (Global Vectors for Word Representation)** embeddings are used to represent each word as a dense vector in a high-dimensional space.  
-   - Pre-trained GloVe vectors (e.g., `300d`) are loaded, and the vocabulary indices are mapped to their corresponding GloVe embeddings. This results in fixed-size embeddings for each question.  
+   - Pre-trained GloVe vectors (e.g., `300d`) are loaded, and the vocabulary indices are mapped to their corresponding GloVe embeddings. This results in fixed-size embeddings for each question.
+   - Glove embeddings can be downloaded by executing following command:
+     ```bash
+     pip install gdown
+     gdown --id 16uAbJ0bgq3mXo64bpYWhMqmLJnNg33nUGLvEmzsSeGM -O output.txt
+     ```
 
 4. **Tensor Preparation**  
    - Question pairs are represented as two tensors (one for each question) of equal size.  
@@ -43,7 +48,12 @@ The initial step in solving the duplicate question detection task involves proce
 
 By leveraging **PyTorch** for tensor operations and GloVe for embeddings, this approach establishes a robust pipeline for converting text data into a numerical format that is well-suited for deep learning. The use of pre-trained GloVe vectors ensures that the model benefits from linguistic knowledge, improving its ability to understand the semantic relationships between question pairs.
 
-### Methodology
+### Implementation
+
+To run the models, first go to models folder :
+```bash
+cd models
+```
 
 #### 1. **Baseline Neural Network**
 The **BaselineNN** serves as a simple starting point. It directly takes the pre-trained GloVe embeddings of the two input questions, averages them to create a single feature vector for each question, and concatenates these vectors. The concatenated vector is then passed through a series of fully connected layers to classify whether the questions are duplicates or not.  
@@ -51,7 +61,6 @@ The **BaselineNN** serves as a simple starting point. It directly takes the pre-
 - Provides a baseline accuracy for comparison with more complex architectures.
 - Lacks the ability to capture sequential dependencies or local patterns in the input data.
 ```bash
-cd models
 python3 baseline_nn.py
 ```
 ---
@@ -62,7 +71,9 @@ The **SiameseCNN** extracts local features from the input embeddings using convo
   - Effective in capturing local patterns like phrases or short n-grams.
   - Efficient due to parallel CNN layers.
   - Cannot model long-term dependencies across the sequence.
-
+```bash
+python3 siamese_cnn.py
+```
 ---
 
 #### 3. **Siamese Long Short-Term Memory Network (SiameseLSTM)**  
@@ -71,7 +82,9 @@ The **SiameseLSTM** uses LSTM layers to process the two input questions. LSTMs a
   - Captures long-term dependencies in questions.
   - Suitable for understanding semantic meaning in sequences.
   - Computationally more intensive compared to CNNs.
-
+```bash
+python3 siamese_lstm.py
+```
 ---
 
 #### 4. **Siamese LSTM with Convolutional Neural Network (SiameseLSTM-CNN)**  
@@ -80,7 +93,9 @@ The **SiameseLSTM-CNN** combines the strengths of LSTMs and CNNs. It uses LSTMs 
   - Leverages both sequential modeling (LSTM) and local feature extraction (CNN).
   - More expressive feature representations.
   - Increased complexity and training time due to dual processing branches.
-
+```bash
+python3 siamese_lstm_cnn.py
+```
 ---
 
 #### 5. **Siamese LSTM with Attention**  
@@ -91,7 +106,9 @@ The **SiameseLSTMWithAttention** introduces an attention mechanism to improve th
   - Outputs an attention-weighted sum of LSTM hidden states, emphasizing key parts of the input.
   - Better at focusing on the most critical tokens in longer sequences.
   - Captures fine-grained semantic relationships between questions.
-
+```bash
+python3 lstm_with_attention.py
+```
 ---
 
 #### 6. **Simple Encoder-Decoder Model**  
@@ -102,7 +119,9 @@ This model uses an encoder-decoder architecture with LSTM layers. The encoder pr
   - Simpler than attention-based models while effective for moderate-length sequences.
   - Provides a foundation for integrating attention in later models.
   - Relies only on the final hidden state of the decoder, potentially losing context for long sequences.
-
+```bash
+python3 simple_encoder_decoder.py
+```
 ---
 
 #### 7. **Bidirectional LSTM Encoder-Decoder (BiLSTMEncoderDecoder)**  
@@ -113,7 +132,6 @@ This model builds on the encoder-decoder architecture by introducing bidirection
   - Outputs a concatenation of bidirectional decoder states for classification.
   - Stronger contextual modeling than unidirectional encoder-decoder models.
   - Captures dependencies from both ends of the sequence.
-
 ---
 
 8. **Attention-based Encoder-Decoder (AttentionEncoderDecoder)**
@@ -125,6 +143,7 @@ The **Attention-based Encoder-Decoder** model enhances the basic encoder-decoder
    - *At each decoding step, the model selects relevant parts of the input sequence to inform its output, leading to more accurate and contextually-aware generation.
    - Unlike simple encoder-decoder models, attention-based models can handle longer sequences by allowing the decoder to access all parts of the input sequence, avoiding the limitations of using only the final hidden state.
    - The model’s complexity can lead to overfitting if not properly regularized, especially on smaller datasets.
+---
 
 9. **Complex Encoder-Decoder with Multi-Head Attention and Residual Connections (ComplexEncoderDecoder)**
 
@@ -135,6 +154,10 @@ The **Complex Encoder-Decoder** model takes the attention-based architecture a s
    - **Positional Encoding**: Positional encoding is used to give the model a sense of token order, which is critical in sequence-based tasks like question answering and SPARQL query generation.
    - **Increased Complexity**: The combination of multi-head attention, residual connections, and positional encoding creates a highly expressive model that can handle complex tasks but at the cost of increased computational requirements and potential difficulty in tuning.
    - **Improved Performance**: By capturing long-range dependencies and incorporating multiple perspectives through attention heads, this model improves performance on tasks involving intricate patterns and contextual information.
+```bash
+python3 complex_transformer.py
+```
+---
 
 10. **Transformer Encoder-Decoder (TransformerEncoderDecoder)**
 
@@ -145,7 +168,10 @@ The **Transformer Encoder-Decoder** model uses a purely attention-based architec
    - **Stacked Layers**: The model uses multiple layers of attention and feedforward networks in both the encoder and decoder, improving its ability to model complex relationships in the data.
    - **Scalability**: The transformer model is highly scalable, making it suitable for processing long sequences and large datasets, especially for tasks like translation or complex question answering.
    - **Computational Efficiency**: Although powerful, transformers can be computationally expensive in terms of memory and processing time, particularly with large-scale datasets or very long sequences.
-
+```bash
+python3 transformer_encoder_decoder.py
+```
+---
 11. **UltimateEncoderDecoder with Gated Residual Networks and Memory (UltimateEncoderDecoder)**
 
 The **UltimateEncoderDecoder** model combines the best features of all the previous models, incorporating **Gated Residual Networks (GRN)**, **Memory Networks**, and **Multi-Head Attention** to achieve the most powerful sequence-to-sequence architecture.
@@ -156,7 +182,10 @@ The **UltimateEncoderDecoder** model combines the best features of all the previ
    - **Transformer-Style Decoder**: The decoder uses a transformer-like architecture, combining self-attention and feedforward layers to process the output sequence.
    - **Scalability and Flexibility**: The model is highly scalable and can handle long-range dependencies, making it effective for tasks involving large datasets or complex question-answering scenarios.
    - **Complexity and Training Time**: With the combination of all these advanced techniques, the model requires more computational resources, making it more expensive to train and fine-tune. It may also be prone to overfitting if the dataset is not sufficiently large.
-
+```bash
+python3 complex_transformer.py
+```
+---
 
 | **Model**                       | **Unique Feature**                                 | **Accuracy (%)** | **Strengths**                                      |
 |----------------------------------|----------------------------------------------------|------------------|----------------------------------------------------|
